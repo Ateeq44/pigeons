@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Slider;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class SliderController extends Controller
 {
     public function index()
     {
-        $sliders = Slider::orderBy('sort_order')->orderByDesc('id')->get();
+        $sliders = Slider::orderBy('sort_order')->latest()->paginate(20);
         return view('admin.sliders.index', compact('sliders'));
     }
 
@@ -23,24 +24,21 @@ class SliderController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'title' => ['nullable','string','max:255'],
-            'link_url' => ['nullable','string','max:500'],
+            'title'      => ['nullable','string','max:255'],
+            'link_url'   => ['nullable','string','max:500'],
             'sort_order' => ['nullable','integer','min:0'],
-            'is_active' => ['nullable'],
-            'image' => ['required','image','max:4096'],
+            'is_active'  => ['nullable','boolean'],
+            'image'      => ['required','image','mimes:jpg,jpeg,png,webp','max:2048'],
         ]);
 
-        $path = $request->file('image')->store('sliders', 'public');
+        $data['is_active'] = $request->boolean('is_active');
 
-        Slider::create([
-            'title' => $data['title'] ?? null,
-            'link_url' => $data['link_url'] ?? null,
-            'sort_order' => $data['sort_order'] ?? 0,
-            'is_active' => $request->boolean('is_active'),
-            'image_path' => $path,
-        ]);
+        // ✅ Upload to public/uploads/sliders
+        $data['image_path'] = $this->uploadToPublic($request->file('image'), 'uploads/sliders');
 
-        return redirect()->route('admin.sliders.index')->with('success','Slider added');
+        Slider::create($data);
+
+        return redirect()->route('admin.sliders.index')->with('success','Slider created');
     }
 
     public function edit(Slider $slider)
@@ -51,35 +49,49 @@ class SliderController extends Controller
     public function update(Request $request, Slider $slider)
     {
         $data = $request->validate([
-            'title' => ['nullable','string','max:255'],
-            'link_url' => ['nullable','string','max:500'],
+            'title'      => ['nullable','string','max:255'],
+            'link_url'   => ['nullable','string','max:500'],
             'sort_order' => ['nullable','integer','min:0'],
-            'is_active' => ['nullable'],
-            'image' => ['nullable','image','max:4096'],
+            'is_active'  => ['nullable','boolean'],
+            'image'      => ['nullable','image','mimes:jpg,jpeg,png,webp','max:2048'],
         ]);
 
+        $data['is_active'] = $request->boolean('is_active');
+
         if ($request->hasFile('image')) {
-            if ($slider->image_path && Storage::disk('public')->exists($slider->image_path)) {
-                Storage::disk('public')->delete($slider->image_path);
+            // delete old
+            if ($slider->image_path && File::exists(public_path($slider->image_path))) {
+                File::delete(public_path($slider->image_path));
             }
-            $slider->image_path = $request->file('image')->store('sliders', 'public');
+
+            $data['image_path'] = $this->uploadToPublic($request->file('image'), 'uploads/sliders');
         }
 
-        $slider->title = $data['title'] ?? null;
-        $slider->link_url = $data['link_url'] ?? null;
-        $slider->sort_order = $data['sort_order'] ?? 0;
-        $slider->is_active = $request->boolean('is_active');
-        $slider->save();
+        $slider->update($data);
 
-        return redirect()->route('admin.sliders.index')->with('success','Slider updated');
+        return back()->with('success','Slider updated');
     }
 
     public function destroy(Slider $slider)
     {
-        if ($slider->image_path && Storage::disk('public')->exists($slider->image_path)) {
-            Storage::disk('public')->delete($slider->image_path);
+        if ($slider->image_path && File::exists(public_path($slider->image_path))) {
+            File::delete(public_path($slider->image_path));
         }
+
         $slider->delete();
         return back()->with('success','Slider deleted');
+    }
+
+    private function uploadToPublic($file, string $relativeDir): string
+    {
+        $dir = public_path($relativeDir);
+        if (!File::exists($dir)) {
+            File::makeDirectory($dir, 0755, true);
+        }
+
+        $name = time().'_'.Str::random(10).'.'.$file->getClientOriginalExtension();
+        $file->move($dir, $name);
+
+        return $relativeDir.'/'.$name; // ✅ saved in DB like: uploads/sliders/xxx.jpg
     }
 }

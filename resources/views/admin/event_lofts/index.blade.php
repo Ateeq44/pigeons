@@ -76,7 +76,7 @@
                     <td>{{ $i+1 }}</td>
                     <td style="width:70px;">
                         @if($p->loft?->photo_path)
-                            <img src="{{ asset('storage/'.$p->loft->photo_path) }}" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">
+                            <img src="{{ asset($p->loft->photo_path) }}" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">
                         @else
                             <div class="bg-secondary-subtle" style="width:48px;height:48px;border-radius:50%;"></div>
                         @endif

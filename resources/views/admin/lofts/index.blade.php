@@ -27,7 +27,7 @@
                     <td>{{ $l->id }}</td>
                     <td style="width:70px;">
                         @if($l->photo_path)
-                            <img src="{{ asset('storage/'.$l->photo_path) }}" alt="" style="width:48px;height:48px;object-fit:cover;border-radius:50%;">
+                            <img src="{{ asset($l->photo_path) }}" alt="" style="width:48px;height:48px;object-fit:cover;border-radius:50%;">
                         @else
                             <div class="bg-secondary-subtle" style="width:48px;height:48px;border-radius:50%;"></div>
                         @endif

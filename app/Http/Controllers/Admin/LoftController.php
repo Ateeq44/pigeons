@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Loft;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class LoftController extends Controller
 {
@@ -25,23 +26,17 @@ class LoftController extends Controller
         $data = $request->validate([
             'name_ur'    => ['required','string','max:255'],
             'city_ur'    => ['nullable','string','max:255'],
-            'photo'      => ['nullable','image','max:2048'],
             'sort_order' => ['nullable','integer','min:0'],
+            'photo'      => ['nullable','image','mimes:jpg,jpeg,png,webp','max:2048'],
         ]);
 
-        $photoPath = null;
         if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('lofts', 'public');
+            $data['photo_path'] = $this->uploadToPublic($request->file('photo'), 'uploads/lofts');
         }
 
-        Loft::create([
-            'name_ur' => $data['name_ur'],
-            'city_ur' => $data['city_ur'] ?? null,
-            'photo_path' => $photoPath,
-            'sort_order' => $data['sort_order'] ?? 0,
-        ]);
+        Loft::create($data);
 
-        return redirect()->route('admin.lofts.index')->with('success', 'Loft created successfully.');
+        return redirect()->route('admin.lofts.index')->with('success','Loft created');
     }
 
     public function edit(Loft $loft)
@@ -49,30 +44,29 @@ class LoftController extends Controller
         return view('admin.lofts.edit', compact('loft'));
     }
 
+    
     public function update(Request $request, Loft $loft)
     {
         $data = $request->validate([
             'name_ur'    => ['required','string','max:255'],
             'city_ur'    => ['nullable','string','max:255'],
-            'photo'      => ['nullable','image','max:2048'],
             'sort_order' => ['nullable','integer','min:0'],
+            'photo'      => ['nullable','image','mimes:jpg,jpeg,png,webp','max:2048'],
         ]);
 
         if ($request->hasFile('photo')) {
-            // delete old
-            if ($loft->photo_path) {
-                Storage::disk('public')->delete($loft->photo_path);
+
+        // ✅ old file delete (only if exists in public)
+            if ($loft->photo_path && File::exists(public_path($loft->photo_path))) {
+                File::delete(public_path($loft->photo_path));
             }
-            $loft->photo_path = $request->file('photo')->store('lofts', 'public');
+
+            $data['photo_path'] = $this->uploadToPublic($request->file('photo'), 'uploads/lofts');
         }
 
-        $loft->name_ur = $data['name_ur'];
-        $loft->city_ur = $data['city_ur'] ?? null;
-        $loft->sort_order = $data['sort_order'] ?? 0;
+        $loft->update($data);
 
-        $loft->save();
-
-        return redirect()->route('admin.lofts.index')->with('success', 'Loft updated successfully.');
+        return back()->with('success','Loft updated');
     }
 
     public function destroy(Loft $loft)
@@ -86,4 +80,18 @@ class LoftController extends Controller
     }
 
     public function show(Loft $loft) { abort(404); }
+
+
+    private function uploadToPublic($file, string $relativeDir): string
+    {
+        $dir = public_path($relativeDir);
+        if (!File::exists($dir)) {
+            File::makeDirectory($dir, 0755, true);
+        }
+
+        $name = time().'_'.Str::random(10).'.'.$file->getClientOriginalExtension();
+        $file->move($dir, $name);
+
+    return $relativeDir.'/'.$name; // ✅ uploads/lofts/xxx.jpg
+}
 }

@@ -50,7 +50,7 @@
                         <td>
                             <div class="d-flex align-items-center gap-2">
                                 @if($loft->photo_path)
-                                    <img src="{{ asset('storage/'.$loft->photo_path) }}"
+                                    <img src="{{ asset($loft->photo_path) }}"
                                          style="width:38px;height:38px;border-radius:50%;object-fit:cover;">
                                 @else
                                     <div class="bg-secondary-subtle" style="width:38px;height:38px;border-radius:50%;"></div>

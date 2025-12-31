@@ -60,7 +60,7 @@
 
                             <td style="width:70px;">
                                 @if($r->photo_path)
-                                    <img src="{{ asset('storage/'.$r->photo_path) }}"
+                                    <img src="{{ asset($r->photo_path) }}"
                                          style="width:44px;height:44px;border-radius:50%;object-fit:cover;">
                                 @else
                                     <div class="bg-secondary-subtle" style="width:44px;height:44px;border-radius:50%;"></div>

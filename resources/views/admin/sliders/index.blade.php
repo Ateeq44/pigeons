@@ -20,7 +20,7 @@
         <tr>
           <td>{{ $i+1 }}</td>
           <td style="width:120px;">
-            <img src="{{ asset('storage/'.$s->image_path) }}" style="width:110px;height:55px;object-fit:cover;border-radius:8px;">
+            <img src="{{ asset($s->image_path) }}" style="width:110px;height:55px;object-fit:cover;border-radius:8px;">
           </td>
           <td>{{ $s->title ?? '—' }}</td>
           <td>{{ $s->is_active ? 'Yes' : 'No' }}</td>

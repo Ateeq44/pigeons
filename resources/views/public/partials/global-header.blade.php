@@ -13,10 +13,10 @@
       <div class="carousel-item {{ $k===0 ? 'active' : '' }}">
         @if($s->link_url)
           <a href="{{ $s->link_url }}">
-            <img src="{{ asset('storage/'.$s->image_path) }}" class="d-block w-100" style="height:340px;object-fit:cover;">
+            <img src="{{ asset($s->image_path) }}" class="d-block w-100" style="height:340px;object-fit:cover;">
           </a>
         @else
-          <img src="{{ asset('storage/'.$s->image_path) }}" class="d-block w-100" style="height:340px;object-fit:cover;">
+          <img src="{{ asset($s->image_path) }}" class="d-block w-100" style="height:340px;object-fit:cover;">
         @endif
       </div>
     @endforeach

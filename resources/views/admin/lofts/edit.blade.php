@@ -27,7 +27,7 @@
             <div class="mb-3">
                 <label class="form-label">Current Photo</label><br>
                 @if($loft->photo_path)
-                    <img src="{{ asset('storage/'.$loft->photo_path) }}" style="width:70px;height:70px;border-radius:50%;object-fit:cover;">
+                    <img src="{{ asset($loft->photo_path) }}" style="width:70px;height:70px;border-radius:50%;object-fit:cover;">
                 @else
                     <span class="text-muted">No photo</span>
                 @endif

@@ -37,7 +37,7 @@
     <div class="col-md-12">
       <label class="form-label">Current Image</label>
       <div class="mb-2">
-        <img src="{{ asset('storage/'.$slider->image_path) }}"
+        <img src="{{ asset($slider->image_path) }}"
              style="width:100%;max-width:520px;height:180px;object-fit:cover;border-radius:12px;">
       </div>
 
