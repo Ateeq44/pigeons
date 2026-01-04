@@ -28,7 +28,9 @@
         <!-- ============================================================== -->
         <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="index.html">Concept</a>
+                <a class="navbar-brand" href="{{ url('admin/dashboard') }}">
+                    <img src="{{ asset('admin/assets/images/logo.png') }}" style="width: 55px;">
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -46,7 +48,7 @@
 
                                 <a class="dropdown-item" href="{{ url('profile') }}">
                                     <i class="fas fa-cog mr-2"></i>
-                                    Setting
+                                    Profile
                                 </a>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
@@ -99,7 +101,7 @@
         <!-- ============================================================== -->
         <!-- footer -->
         <!-- ============================================================== -->
-        <div class="footer">
+        <!-- <div class="footer">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"> Copyright © 2018 Concept. All rights reserved. Dashboard by <a href="https://colorlib.com/wp/">Colorlib</a>. </div>
@@ -112,7 +114,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- ============================================================== -->
         <!-- end footer -->
         <!-- ============================================================== -->

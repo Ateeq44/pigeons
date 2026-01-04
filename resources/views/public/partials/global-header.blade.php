@@ -33,7 +33,7 @@
 
 {{-- 2) Featured clubs green strip --}}
 @if($featuredClubs->count())
-<div class="py-2" style="background:#198754;">
+<div class="py-3" style="background:#3f51b5;">
   <div class="container">
     <div class="d-flex gap-4 flex-wrap align-items-center">
       <a class="text-white fw-bold text-decoration-none" href="{{ route('public.home') }}">Home</a>
@@ -52,10 +52,10 @@
 {{-- 3) Tagline marquee white strip --}}
 @if($tagline)
 <div class="bg-white border-bottom">
-  <div class="container py-2">
+  <div class="container py-3">
     <div class="marquee">
       <div class="marquee__inner">
-        <span>{{ $tagline }}</span>
+        <span style="color: #3f51b5;">{{ $tagline }}</span>
       </div>
     </div>
   </div>
@@ -64,7 +64,7 @@
 
 {{-- 4) Featured events blue strip --}}
 @if($featuredEvents->count())
-<div class="py-2" style="background:#0b79d0;">
+<div class="py-3" style="background:#3f51b5;">
   <div class="container">
     <div class="d-flex gap-3 flex-wrap">
       @foreach($featuredEvents as $e)

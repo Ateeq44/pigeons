@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="mb-3">
-    <div class="p-3 text-white rounded" style="background:#198754;">
+    <div class="p-3 text-white rounded" style="background:#3f51b5;">
         <div class="fw-bold" style="font-size:20px;">
             {{ $event->title_ur }}
         </div>

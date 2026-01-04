@@ -1,0 +1,52 @@
+body { 
+	background:#f6f7fb;
+}
+.brandbar { 
+	background:#fff;
+}
+.card { 
+	border:0; border-radius: 14px;
+}
+.table thead th { 
+	white-space: nowrap;
+}
+.table td { 
+	white-space: nowrap;
+}
+.marquee{ 
+	overflow:hidden; white-space:nowrap; direction:ltr;
+}
+.marquee__inner{
+	display:inline-block;
+	animation: marquee-ltr 22s linear infinite;
+}
+.marquee:hover .marquee__inner{ 
+	animation-play-state: paused;
+}
+
+@keyframes marquee-ltr{
+	0%{ transform: translateX(-100%); }
+	100%{ transform: translateX(0); }
+}
+
+
+.btn-outline-primary{
+	border: 1px solid #3f51b5 !important;
+	color: #3f51b5 !important;
+}
+.btn-outline-primary:hover{
+	background-color: #3f51b5 !important;
+	color: #fff !important;
+}
+
+.btn-primary{
+	background: #3f51b5 !important;
+	border: 1px solid #3f51b5 !important;
+}
+
+.active>.page-link, .page-link.active {
+    z-index: 3;
+    color: #fff;
+    background-color: #3f51b5 !important;
+    border-color: #3f51b5 !important;
+}
