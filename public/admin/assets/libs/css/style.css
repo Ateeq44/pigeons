@@ -1818,7 +1818,7 @@ Leftsidebar - dark
 }
 
 .sidebar-dark.nav-left-sidebar .nav-link i {
-    color: #7a80b4;
+    color: #ffffff;
 }
 
 .sidebar-dark.nav-left-sidebar .navbar-nav .nav-item {}
@@ -6758,7 +6758,8 @@ Media Query
 
 /* Large Devices, Wide Screens */
 
-@media only screen and (max-width:1400px) {.product-price{position: initial;}.product-slider {
+@media only screen and (max-width:1400px) {
+    .product-price{position: initial;}.product-slider {
     background-color: #fff;
     border-top-left-radius: 4px;
     padding: 131px 28px;}
@@ -6872,6 +6873,9 @@ Media Query
 /* Extra Small Devices, Phones */
 
 @media only screen and (max-width:480px) {
+    .dfsdfsdf{
+        width: unset !important;
+    }
     .dashboard-content {
         padding: 20px 20px 60px 20px;
     }

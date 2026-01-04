@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/fonts/circular-std/style.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/libs/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/fonts/fontawesome/css/fontawesome-all.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/charts/chartist-bundle/chartist.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/charts/morris-bundle/morris.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css') }}">
@@ -81,23 +80,23 @@
     <div class="dashboard-wrapper">
         <div class="container-fluid dashboard-content">            
             @if(session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
+            <div class="alert alert-success">{{ session('success') }}</div>
             @endif
 
             @if($errors->any())
-                <div class="alert alert-danger">
-                    <div class="fw-bold mb-2">Errors:</div>
-                    <ul class="mb-0">
-                        @foreach($errors->all() as $e)
-                            <li>{{ $e }}</li>
-                        @endforeach
-                    </ul>
-                </div>
+            <div class="alert alert-danger">
+                <div class="fw-bold mb-2">Errors:</div>
+                <ul class="mb-0">
+                    @foreach($errors->all() as $e)
+                    <li>{{ $e }}</li>
+                    @endforeach
+                </ul>
+            </div>
             @endif
 
             @yield('content')
         </div>
-            
+        
         <!-- ============================================================== -->
         <!-- footer -->
         <!-- ============================================================== -->
@@ -149,6 +148,7 @@
 <script src="{{ asset('admin/assets/vendor/charts/c3charts/d3-5.4.0.min.js') }}"></script>
 <script src="{{ asset('admin/assets/vendor/charts/c3charts/C3chartjs.js') }}"></script>
 <script src="{{ asset('admin/assets/libs/js/dashboard-ecommerce.js') }}"></script>
+<script src="https://kit.fontawesome.com/f5eb8f10bc.js" crossorigin="anonymous"></script>
 @stack('scripts')
 </body>
 </html>

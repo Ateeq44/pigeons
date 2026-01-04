@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/fonts/circular-std/style.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/libs/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/fonts/fontawesome/css/fontawesome-all.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/charts/chartist-bundle/chartist.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/charts/morris-bundle/morris.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css') }}">
@@ -31,10 +30,8 @@
                 <a class="navbar-brand" href="{{ url('admin/dashboard') }}">
                     <img src="{{ asset('admin/assets/images/logo.png') }}" style="width: 55px;">
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                
+                <div class="w-100 dfsdfsdf d-flex justify-content-end">
                     <ul class="navbar-nav ml-auto navbar-right-top">
                         <li class="nav-item dropdown nav-user">
                             <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -81,23 +78,23 @@
     <div class="dashboard-wrapper">
         <div class="container-fluid dashboard-content">            
             @if(session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
+            <div class="alert alert-success">{{ session('success') }}</div>
             @endif
 
             @if($errors->any())
-                <div class="alert alert-danger">
-                    <div class="fw-bold mb-2">Errors:</div>
-                    <ul class="mb-0">
-                        @foreach($errors->all() as $e)
-                            <li>{{ $e }}</li>
-                        @endforeach
-                    </ul>
-                </div>
+            <div class="alert alert-danger">
+                <div class="fw-bold mb-2">Errors:</div>
+                <ul class="mb-0">
+                    @foreach($errors->all() as $e)
+                    <li>{{ $e }}</li>
+                    @endforeach
+                </ul>
+            </div>
             @endif
 
             @yield('content')
         </div>
-            
+        
         <!-- ============================================================== -->
         <!-- footer -->
         <!-- ============================================================== -->
@@ -149,6 +146,7 @@
 <script src="{{ asset('admin/assets/vendor/charts/c3charts/d3-5.4.0.min.js') }}"></script>
 <script src="{{ asset('admin/assets/vendor/charts/c3charts/C3chartjs.js') }}"></script>
 <script src="{{ asset('admin/assets/libs/js/dashboard-ecommerce.js') }}"></script>
+<script src="https://kit.fontawesome.com/f5eb8f10bc.js" crossorigin="anonymous"></script>
 @stack('scripts')
 </body>
 </html>
