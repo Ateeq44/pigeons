@@ -35,7 +35,7 @@
     <div class="splash-container">
         <div class="card ">
             <div class="card-header text-center">
-                <a><img class="logo- w-25" src="{{asset('uploads/logo.png')}}" alt="logo"></a>
+                <a><img class="logo- w-25" src="{{asset('admin/assets/images/logo.png')}}" alt="logo"></a>
                 <span class="splash-description mt-3">Please enter your user information.</span>
             </div>
 
