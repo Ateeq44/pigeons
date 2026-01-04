@@ -11,8 +11,8 @@ class Club extends Model
 
     protected $fillable = [
         'name_ur',
-        'slug',
         'sort_order',
+        'is_featured',
     ];
 
     // Step 2.2 me Event model banega, tab relationship add karenge

@@ -23,23 +23,13 @@ class ClubController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name_ur'    => ['required','string','max:255'],
-            'slug'       => ['nullable','string','max:255','unique:clubs,slug'],
-            'sort_order' => ['nullable','integer','min:0'],
+            'name_ur'     => ['required','string','max:255'],
+            'sort_order'  => ['nullable','integer','min:0'],
+            'is_featured' => ['nullable'],
         ]);
 
-        if (empty($data['slug'])) {
-            // Urdu slug auto (simple) — unique ensure
-            $base = Str::slug($data['name_ur']) ?: 'club';
-            $slug = $base;
-            $i = 1;
-            while (Club::where('slug', $slug)->exists()) {
-                $slug = $base.'-'.$i++;
-            }
-            $data['slug'] = $slug;
-        }
-
-        $data['sort_order'] = $data['sort_order'] ?? 0;
+        $data['is_featured'] = $request->boolean('is_featured');
+        $data['sort_order']  = $data['sort_order'] ?? 0;
 
         Club::create($data);
 
@@ -54,12 +44,13 @@ class ClubController extends Controller
     public function update(Request $request, Club $club)
     {
         $data = $request->validate([
-            'name_ur'    => ['required','string','max:255'],
-            'slug'       => ['required','string','max:255','unique:clubs,slug,'.$club->id],
-            'sort_order' => ['nullable','integer','min:0'],
+            'name_ur'     => ['required','string','max:255'],
+            'is_featured' => ['nullable'],
+            'sort_order'  => ['nullable','integer','min:0'],
         ]);
 
-        $data['sort_order'] = $data['sort_order'] ?? 0;
+        $data['is_featured'] = $request->boolean('is_featured');
+        $data['sort_order']  = $data['sort_order'] ?? 0;
 
         $club->update($data);
 

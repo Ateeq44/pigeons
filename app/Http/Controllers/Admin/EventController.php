@@ -41,10 +41,7 @@ class EventController extends Controller
         $data['is_featured'] = $request->boolean('is_featured');
         $data['sort_order'] = $data['sort_order'] ?? 0;
 
-        // If featured true, make others false (optional rule)
-        if ($data['is_featured']) {
-            Event::where('is_featured', true)->update(['is_featured' => false]);
-        }
+        
 
         Event::create($data);
 
@@ -72,10 +69,6 @@ class EventController extends Controller
 
         $data['is_featured'] = $request->boolean('is_featured');
         $data['sort_order'] = $data['sort_order'] ?? 0;
-
-        if ($data['is_featured']) {
-            Event::where('id','!=',$event->id)->where('is_featured', true)->update(['is_featured' => false]);
-        }
 
         $event->update($data);
 

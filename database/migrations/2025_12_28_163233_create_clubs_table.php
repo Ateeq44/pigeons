@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('clubs', function (Blueprint $table) {
             $table->id();
             $table->string('name_ur');            // Urdu name
-            $table->string('slug')->unique();     // URL slug
             $table->unsignedSmallInteger('sort_order')->default(0);
             $table->timestamps();
         });
