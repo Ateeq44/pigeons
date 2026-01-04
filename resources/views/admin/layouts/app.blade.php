@@ -36,7 +36,7 @@
                     <ul class="navbar-nav ml-auto navbar-right-top">
                         <li class="nav-item dropdown nav-user">
                             <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="assets/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle">
+                                <img src="{{ asset('admin/assets/images/avatar-1.png') }}" alt="" class="user-avatar-md rounded-circle">
                             </a>
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
                                 <div class="nav-user-info">
@@ -44,7 +44,7 @@
                                     <span class="status"></span>
                                 </div>
 
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{{ url('profile') }}">
                                     <i class="fas fa-cog mr-2"></i>
                                     Setting
                                 </a>
